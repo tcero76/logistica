@@ -1,0 +1,32 @@
+<div id="frmOrecOritem" th:fragment="formorec">
+	<form id="frmOrec" action="#" th:action="@{/orec/save}" th:object="${orec}" method="post">
+		<div class="form-row">
+			<div class="col-md-4 mb-3">
+				<label for="guiadedespacho">Guía de Despacho</label>
+				<input id="guiadedespacho" type="text" th:field="*{guiadedespacho}" autocomplete="off"
+					th:class="${#fields.hasErrors('guiadedespacho')?'is-invalid form-control':'form-control'}"/>
+				<div th:if="${#fields.hasErrors('guiadedespacho')}" class="invalid-feedback" th:errors="*{guiadedespacho}"></div>
+			</div>
+		</div>
+	</form>
+	<form id="frmOritem" action="#" th:action="@{/orec/add}" th:object="${oritem}" method="post">
+		<div class="form-row">
+			<div class="col-md-4 mb-3">
+				<label for="idMaterial">Material</label>
+				<select th:field="*{material}"
+					th:class="${#fields.hasErrors('material')}?'is-invalid custom-select':'custom-select'">
+				  <option value="">Seleccionar</option>
+				  <option th:each="mat : ${materiales}" th:value="${mat.idmaterial}" th:text="${mat.nombre}"></option>
+				</select>
+				<div th:if="${#fields.hasErrors('material')}" class="invalid-feedback" th:errors="*{material}"></div>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="idCantidad">Cantidad</label>
+				<input id="idCantidad" type="text" th:field="*{cantidad}"
+					th:class="${#fields.hasErrors('cantidad')}?'is-invalid form-control numFormat':'form-control numFormat'" >
+				<div th:if="${#fields.hasErrors('cantidad')}" class="invalid-feedback"
+					th:errors="*{cantidad}"></div>
+			</div>
+		</div>
+	</form>
+</div>

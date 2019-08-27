@@ -1,0 +1,23 @@
+version: '3'
+services:
+  logisticaDB:
+    restart: always
+    volumes:
+      - ./mysql/:/var/lib/mysql
+    image: mysql:5.6
+    ports:
+       - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'Waves6_'
+#      MYSQL_DATABASE: 'logistica'
+#      MYSQL_USER: 'logistica'
+#      MYSQL_PASSWORD: 'Waves6_'
+#  springboot:
+#    restart: always
+#    volumes:
+#      - ./target/dependency/BOOT-INF/lib:/app/lib
+#      - ./target/dependency/META-INF:/app/META-INF
+#      - ./target/dependency/BOOT-INF/classes:/app
+#    build: .
+#    ports:
+#      - "8080:8080"

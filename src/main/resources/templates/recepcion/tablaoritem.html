@@ -1,0 +1,29 @@
+<div id="tblOritem" class="container" th:fragment="tablaoritem">
+	<table class="table table-striped" th:if="${!oritems.isEmpty()}">
+		<thead>
+			<tr>
+				<th scope="col">Material</th>
+				<th scope="col">Cantidad</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ore : ${oritems}">
+				<td scope="col" th:text="${ore.material.nombre}"></td>
+				<td scope="col" th:text="${ore.cantidad}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<button class="btn btn-primary" onclick="guardar()" th:if="${!oritems.isEmpty()}"><i class="fas fa-save"></i> Guardar</button>
+	<script type="text/javascript">
+		let csrf = $('input[name="_csrf"]').val();
+		function guardar() {
+			$.ajax({
+				type: "POST",
+				url:"/orec/save?_csrf=" + csrf,
+				success:function(data,status,jqXHR){
+					window.location.href = "/orec/";
+					}, 
+				});
+		}
+	</script>
+</div>

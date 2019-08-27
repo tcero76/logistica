@@ -1,0 +1,32 @@
+<div th:fragment="recepcion">
+	<h1>Ingreso de Recepción</h1>
+	<div class="container">
+		<div th:replace="recepcion/orec.html :: formorec"></div>
+		<button class="btn btn-primary btn-sm" onclick="enviar()">+ Agregar</button>
+	</div>
+	<div th:replace="recepcion/tablaoritem.html :: tablaoritem"></div>
+	<script type="text/javascript">
+	function enviar() {
+		let csrf = $('input[name="_csrf"]').val();
+		var data = $('#frmOritem *').filter('input').serialize() + '&'
+			+ $('#frmOritem *').filter('select').serialize() + '&'
+			+ $('#frmOrec *').filter('input[name="guiadedespacho"]').serialize() ;
+		$.ajax({
+			type: 'POST',
+			data: data,
+			url : "/orec/add?_csrf=" + csrf,
+			success:function(data,status,jqXHR) {
+				$('#frmOrecOritem').replaceWith(data);
+				$.ajax({
+					type: 'GET',
+					url : "/orec/table",
+					success:function(data,status,jqXHR) {
+						$('#tblOritem').replaceWith(data);
+					},	
+				});
+				
+			},
+		});
+	}
+	</script>
+</div>
