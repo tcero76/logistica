@@ -1,0 +1,10 @@
+<div th:fragment="texto(label,variable)" class="col-md-4 mb-3">
+	<label th:for="id + ${label}" th:text="${label}"></label> <input
+		th:id="id + ${label}" type="text" th:name="${variable}"
+		th:value="*{__${variable}__}" autocomplete="off" class="form-control"
+		th:required="true">
+	<div th:if="${#fields.hasErrors('__${variable}__')}"
+		class="invalid-feedback" th:errors="*{__${variable}__}"></div>
+</div>
+
+

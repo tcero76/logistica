@@ -1,8 +1,6 @@
 package com.example.demo.dao;
 
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Orec;
-import com.example.demo.model.Oritem;
 
 @Repository
 public class DaoOrImpl implements DaoOr {

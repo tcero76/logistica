@@ -17,14 +17,6 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "orec",catalog = "logistica")
 public class Orec {
 
-	
-    public Orec() {
-	}
-
-	public Orec(String material, Integer cantidad) {
-		super();
-	}
- 
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "idorec", unique = true, nullable = false)

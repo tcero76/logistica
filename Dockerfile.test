@@ -1,7 +1,8 @@
 FROM openjdk:8 as builder
-WORKDIR '/'
-COPY pom.xml pom.xml
-COPY mvnw mvnw
-COPY /.mvn /.mvn
-RUN ./mvnw clean install
-
+WORKDIR /build
+COPY ~/.m2/ /root/.m2/
+COPY pom.xml /build/pom.xml
+COPY mvnw /build/mvnw
+COPY .mvn/ /build/.mvn/
+COPY src/ /build/src/
+ENTRYPOINT ["/build/mvnw","verify"]

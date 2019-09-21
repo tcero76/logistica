@@ -1,0 +1,23 @@
+<div th:fragment="zona" class="form-group">
+	<label for="idZona" th:name="*{idzona}" th:text="Zona"></label>
+	<select th:class="custom-select"
+		th:id="idZona" autocomplete="off"
+		th:onchange="findNiveles(this.value)">
+		<option value="">Seleccionar</option>
+		<option th:each="op : ${zonas}" th:value="${op.idzona}"
+			th:text="${op.nombre}" th:selected="${op.idzona==zona.idzona}"></option>
+	</select>
+	<div th:if="${#fields.hasErrors('idzona')}" class="invalid-feedback"></div>
+	<script type="text/javascript">
+		function findNiveles(value) {
+			$.ajax({
+				type: 'POST',
+				url: '/ubicar/zona',
+				data: 'idzona='+value,
+				success: function(data,status,jqXHR) {
+					$('div#nivel').replaceWith(data);
+					},
+				})
+			}
+	</script>
+</div>

@@ -1,0 +1,24 @@
+sudo: required
+
+services:
+  - docker
+before_install:
+  - docker build -t tcero76/test -f Dockerfile.test .
+script:
+  - docker run -e "MYSQL_HOST=$AWS_IP" -e "MYSQL_USER=$MYSQL_USER" -e "MYSQL_PASS=$MYSQL_PASS"tcero76/test 
+after_success:
+  - docker build -t tcero76/logistica -f Dockerfile.dev .
+  - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+  - docker push tcero76/logistica
+#deploy:
+#  provider: elasticbeanstalk
+#  region: "us-east-2"
+#  app: "logistica"
+#  env: "Logistica-env"
+#  bucket-name: "elasticbeanstalk-us-east-2-614390425524"
+#  bucket-path: "logistica"
+#  on:
+#    branch: master
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_key_id: 
+#    secure: $AWS_SECRET_ACCESS_KEY

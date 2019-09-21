@@ -1,0 +1,38 @@
+<div id="tblUbicacion" class="container" th:fragment="pendientes">
+	<table class="table table-striped" th:if="${!oritems.isEmpty()}">
+<thead class="encabezados">
+	<tr>
+		<th scope="col">Or</th>
+		<th scope="col">Pos</th>
+		<th scope="col">Material</th>
+		<th scope="col">Cantidad</th>
+		<th></th>
+	</tr>
+</thead>
+		<tbody>
+			<tr th:each="ore : ${oritems}">
+				<td scope="col" th:text="${ore.orec.idorec}"></td>
+				<td scope="col" th:text="${ore.pos}"></td>
+				<td scope="col" th:text="${ore.material.nombre}"></td>
+				<td scope="col" th:text="${ore.cantidad}"></td>
+				<td scope="col">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" th:onclick="'guardar('+${ore.idoritem}+')'">
+					<i class="fas fa-crosshairs"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		function guardar(idoritem) {
+			$.ajax({
+				type: 'POST',
+				url:'/ubicar/oritem',
+				data: 'idoritem=' + idoritem,
+				success:function(data,status,jqXHR){
+// 					window.location.href = "/orec/";
+					}, 
+				});
+		}
+	</script>
+</div>

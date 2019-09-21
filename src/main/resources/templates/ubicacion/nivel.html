@@ -1,0 +1,23 @@
+
+<div id="nivel" th:fragment="nivel" class="form-group">
+	<label for="idNivel" th:text="Nivel"></label>
+	<select th:class="custom-select"
+		th:id="idNivel" th:name="idnivel" autocomplete="off" th:onchange="getPos(this.value)">
+		<option value="">Seleccionar</option>
+		<option th:each="op : ${niveles}" th:value="${op.idnivel}"
+			th:text="${op.nombre}" th:selected="${op.idnivel==nivel.idnivel}"></option>
+	</select>
+	<div th:if="${#fields.hasErrors('nivel')}" class="invalid-feedback"></div>
+		<script type="text/javascript">
+			function getPos(idNivel) {
+				$.ajax({
+					type: 'POST',
+					data: 'idnivel='+idNivel,
+					url: '/ubicar/nivel',
+					success: function(data,status,jqXHR){
+						$('#posicion').replaceWith(data);
+						}
+					});
+				}
+		</script>
+</div>

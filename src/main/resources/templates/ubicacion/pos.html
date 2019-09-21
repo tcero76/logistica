@@ -1,0 +1,11 @@
+<div id="posicion" th:fragment="pos" class="form-group" th:object="${pos}">
+	<label for="idPos" th:text="Posicion"></label>
+	<select th:id="idPos" th:classappend="${#fields.hasErrors('idpos')}?'is-invalid'" th:class="custom-select"
+		type="text" th:field="${pos.idpos}" autocomplete="off">
+		<option value="">Seleccionar</option>
+		<option th:each="op : ${poses}" th:value="${op.idpos}"
+			th:text="${op.nombre}" th:selected="${op.idpos==idpos}"></option>
+	</select>
+	<div th:classappend="${#fields.hasErrors('idpos')}?'invalid-feedback'" th:errors="*{idpos}"></div>
+</div>
+

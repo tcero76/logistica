@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +29,14 @@ public class Material {
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	private Set<Oritem> oritems;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idusuario")
+	private Usuario usuario;
 
+	@OneToMany(mappedBy = "material")
+	private Set<Inventario> inventarios;
+	
 	public Integer getIdmaterial() {
 		return idmaterial;
 	}
