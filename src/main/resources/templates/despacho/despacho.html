@@ -1,0 +1,34 @@
+<div th:fragment="content">
+	<div class="container">
+
+		<div class="card mb-3">
+			<h5 class="card-header">Despachar</h5>
+			<div class="card-body">
+				<form th:replace="despacho/frmOd.html :: frmOd"></form>
+				<button class="btn btn-primary" th:onclick="enviar()">Agregar</button>
+			</div>
+		</div>
+		<script>
+			function enviar() {
+				var data = $('#idCantidad').serialize() + '&'	 + $('#frmOd *').filter('select').serialize();
+				$.ajax({
+					url:'/despacho/add',
+					type: 'POST',
+					data: data,
+					success: function(data,status,jqXHR) {
+						$('#frmOd').replaceWith(data);
+						$.ajax({
+							url:'/despacho/table',
+							type: 'GET',
+							success: function(data,status,jqXHR) {
+										$('#tblOditem').replaceWith(data);
+								}
+							});
+						}
+					})
+				}
+		</script>
+		<div th:replace="despacho/tabla.html :: tabla">
+		</div>
+	</div>
+</div>

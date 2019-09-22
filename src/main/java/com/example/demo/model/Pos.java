@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -39,6 +41,9 @@ public class Pos {
 	@JoinColumn(name = "idusuario")
 	@JsonIgnore
 	private Usuario usuario;
+	
+	@OneToMany(mappedBy = "pos")
+	private Set<Inventario> inventarios;
 	
 	public Integer getIdpos() {
 		return idpos;
@@ -78,6 +83,14 @@ public class Pos {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Set<Inventario> getInventarios() {
+		return inventarios;
+	}
+
+	public void setInventarios(Set<Inventario> inventarios) {
+		this.inventarios = inventarios;
 	}
 
 	@Override

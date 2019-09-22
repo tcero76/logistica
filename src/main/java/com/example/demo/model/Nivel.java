@@ -27,7 +27,7 @@ public class Nivel {
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idzona")
 	@JsonIgnore
 	private Zona zona;

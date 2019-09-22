@@ -14,65 +14,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Table(name = "zona")
+@Table(name = "od")
 @Entity
-public class Zona {
-
+public class Od {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idzona;
-
-	@Column(name = "nombre")
-	private String nombre;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idalmacen")
-	@JsonIgnore
-	private Almacen almacen;
-	
-	@OneToMany(mappedBy = "zona")
-	private Set<Nivel> niveles;
+	private Integer idod;
 	
 	@Column(name = "fechareg")
 	private Date fechareg;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idusuario")
-	@JsonIgnore
 	private Usuario usuario;
-
-	public Integer getIdzona() {
-		return idzona;
+	
+	@OneToMany(mappedBy = "od")
+	private Set<Oditem> oditems;
+	
+	public Integer getIdod() {
+		return idod;
 	}
 
-	public void setIdzona(Integer idzona) {
-		this.idzona = idzona;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Almacen getAlmacen() {
-		return almacen;
-	}
-
-	public void setAlmacen(Almacen almacen) {
-		this.almacen = almacen;
-	}
-
-	public Set<Nivel> getNiveles() {
-		return niveles;
-	}
-
-	public void setNiveles(Set<Nivel> niveles) {
-		this.niveles = niveles;
+	public void setIdod(Integer idod) {
+		this.idod = idod;
 	}
 
 	public Date getFechareg() {
@@ -95,7 +59,7 @@ public class Zona {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idzona == null) ? 0 : idzona.hashCode());
+		result = prime * result + ((idod == null) ? 0 : idod.hashCode());
 		return result;
 	}
 
@@ -107,13 +71,13 @@ public class Zona {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Zona other = (Zona) obj;
-		if (idzona == null) {
-			if (other.idzona != null)
+		Od other = (Od) obj;
+		if (idod == null) {
+			if (other.idod != null)
 				return false;
-		} else if (!idzona.equals(other.idzona))
+		} else if (!idod.equals(other.idod))
 			return false;
 		return true;
-	}
+	} 
 	
 }

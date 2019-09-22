@@ -1,0 +1,34 @@
+<div id="tblOditem" th:fragment="tabla">
+	<div th:if="${!oditems.isEmpty()}">
+		<table th:class="table">
+			<thead>
+				<th>Pos</th>
+				<th>Material</th>
+				<th>Cantidad</th>
+				<th>Ubicación</th>
+			</thead>
+			<tbody>
+				<tr th:each="oditem : ${oditems}">
+					<td th:text="${oditem.pos}"></td>
+					<td th:text="${oditem.inventario.material.nombre}"></td>
+					<td th:text="${oditem.cantidad}"></td>
+					<td
+						th:text="${oditem.inventario.pos.nivel.zona.nombre + '/' + oditem.inventario.pos.nivel.nombre + '/' + oditem.inventario.pos.nombre}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn btn-primary" th:onclick="guardar()">Guardar</button>
+	</div>
+	<script>
+	function guardar() {
+		$.ajax({
+			url:'/despacho/save',
+			success: function(data,status,jqXHR) {
+				if(data) {
+					window.location.href = '/despacho/';
+				}
+			}
+		});
+	}
+</script>
+</div>

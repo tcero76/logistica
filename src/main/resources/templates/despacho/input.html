@@ -1,0 +1,18 @@
+<div th:fragment="material" class="col-md-4 mb-3">
+	<label for="idMaterial">Material</label>
+	<select id="idMaterial" th:field="*{inventario.idinventario}"
+		th:class="${#fields.hasErrors('inventario')}?'is-invalid custom-select':'custom-select'">
+	  <option value="">Seleccionar</option>
+	  <option th:each="inv : ${inventarios}" th:value="${inv.idinventario}"
+	  	th:text="${inv.material.nombre} +  ' - ' + ${inv.pos.nivel.zona.nombre} + '/' + ${inv.pos.nivel.nombre}  +  '/' + ${inv.pos.nombre} +  '  - ' + ${inv.total}"></option>
+	</select>
+	<div th:if="${#fields.hasErrors('inventario')}" class="invalid-feedback" th:errors="*{inventario}"></div>
+</div>
+
+<div th:fragment="cantidad" class="col-md-4 mb-3">
+	<label for="idCantidad">Cantidad</label>
+	<input id="idCantidad" type="text" th:field="*{cantidad}" autocomplete="off" class="form-control numFormat"
+	th:classappend="${#fields.hasErrors('cantidad') || #fields.hasErrors('global')}?'is-invalid'"></input>
+	<div th:if="${#fields.hasErrors('cantidad')}" class="invalid-feedback" th:errors="*{cantidad}"></div>
+	<div th:if="${#fields.hasErrors('global')}" class="invalid-feedback" th:errors="${oditem}"></div>
+</div>

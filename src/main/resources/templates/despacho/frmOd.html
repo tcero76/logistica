@@ -1,0 +1,6 @@
+<form id="frmOd" th:fragment="frmOd" th:object="${oditem}">
+	<div class="form-row">
+		<div th:replace="despacho/input.html :: material"></div>
+		<div th:replace="despacho/input.html :: cantidad"></div>
+	</div>
+</form>

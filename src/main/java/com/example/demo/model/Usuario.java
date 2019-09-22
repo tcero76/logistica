@@ -44,6 +44,10 @@ public class Usuario  implements UserDetails {
 	@JoinColumn(name = "idrol")
 	private Rol rol;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idalmacen")
+	private Almacen almacen;
+	
 	@OneToMany(mappedBy = "usuario")
 	private Set<Inventario> inventarios;
 	
@@ -53,9 +57,11 @@ public class Usuario  implements UserDetails {
 	@OneToMany(mappedBy = "usuario")
 	private Set<Material> materials;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idalmacen")
-	private Almacen almacen;
+	@OneToMany(mappedBy = "usuario")
+	private Set<Od> ods;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Set<Oditem> oditems;
 	
 	public Rol getRol() {
 		return rol;

@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,15 +12,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Table(name = "inventario")
 @Entity
-public class Inventario {
+public class Inventario implements Serializable {
 	
 	public Inventario() {
 		super();
+	}
+	
+	public Inventario(Date fechareg, Usuario usuario, Material material, Oritem oritem, Double cantidad, Double total,
+			Pos pos, Oditem oditem) {
+		super();
+		this.fechareg = fechareg;
+		this.usuario = usuario;
+		this.material = material;
+		this.oritem = oritem;
+		this.cantidad = cantidad;
+		this.total = total;
+		this.pos = pos;
+		this.oditem = oditem;
 	}
 
 	@Id
@@ -49,6 +65,10 @@ public class Inventario {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idpos")
 	private Pos pos;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idoditem")
+	private Oditem oditem;
 
 	public Integer getIdinventario() {
 		return idinventario;
@@ -138,5 +158,5 @@ public class Inventario {
 			return false;
 		return true;
 	}
-	
+
 }
