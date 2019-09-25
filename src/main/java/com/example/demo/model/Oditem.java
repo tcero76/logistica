@@ -20,7 +20,6 @@ import com.example.demo.validator.CorteStock;
 
 @Table(name = "oditem")
 @Entity
-@CorteStock
 public class Oditem {
 	
 	@Id
@@ -45,12 +44,8 @@ public class Oditem {
 	@JoinColumn(name = "idusuario")
 	private Usuario usuario;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idmaterial")
-	private Material material;
-	
 	@OneToOne(mappedBy = "oditem",cascade = CascadeType.ALL)
-	@com.example.demo.validator.Inventario
+	@NotNull(message = "Se debe seleccionar Inventario")
 	private Inventario inventario;
 
 	public Integer getIdoditem() {
@@ -91,14 +86,6 @@ public class Oditem {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Material getMaterial() {
-		return material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
 	}
 
 	public Inventario getInventario() {

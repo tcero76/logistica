@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Table(name = "inventario")
 @Entity
@@ -60,6 +60,7 @@ public class Inventario implements Serializable {
 	private Double cantidad;
 	
 	@Column(name = "total")
+	@PositiveOrZero(message = "Sin inventario")
 	private Double total;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

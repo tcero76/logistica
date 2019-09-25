@@ -10,7 +10,7 @@
 		</div>
 		<script>
 			function enviar() {
-				var data = $('#idCantidad').serialize() + '&'	 + $('#frmOd *').filter('select').serialize();
+				var data = $('#idCantidad').serialize() + '&' +$('#frmOd *').filter('select').serialize();
 				$.ajax({
 					url:'/despacho/add',
 					type: 'POST',

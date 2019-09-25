@@ -37,9 +37,6 @@ public class Material {
 	@OneToMany(mappedBy = "material")
 	private Set<Inventario> inventarios;
 	
-	@OneToMany(mappedBy = "material")
-	private Set<Oditem> oditems;
-	
 	public Integer getIdmaterial() {
 		return idmaterial;
 	}
